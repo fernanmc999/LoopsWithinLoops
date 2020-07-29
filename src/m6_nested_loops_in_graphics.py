@@ -3,8 +3,8 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Marc Fernandez.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -79,8 +79,27 @@ def draw_L(window, circle, r, c):
       :type c: int
     and m and n are small, positive integers.
     """
+    original_x=circle.center.x
+    original_y=circle.center.y
+    x=original_x
+    y=original_y
+    radius=circle.radius
+    color=circle.fill_color
+    for k in range(r):
+        if k<(r-3):
+            mini=3
+        if k >=(r-3):
+            mini=c
+        for j in range(mini):
+            New_Circle=rg.Circle(rg.Point(x,y),radius)
+            New_Circle.fill_color=color
+            New_Circle.attach_to(window)
+            window.render(0.1)
+            x=x+2*radius
+        y=y+2*radius
+        x=original_x
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
 
@@ -120,8 +139,35 @@ def draw_wall_on_right(rectangle, n, window):
       :type window: rg.RoseWindow
     and n is a small, positive integer.
     """
+    Original_x1 = rectangle.corner_1.x
+    Original_x2 = rectangle.corner_2.x
+    Original_y1 = rectangle.corner_1.y
+    Original_y2 = rectangle.corner_2.y
+
+    y1 = Original_y1
+    x1 = Original_x1
+    y2 = Original_y2
+    x2 = Original_x2
+
+    change_x = x2 - x1
+    change_y = y2 - y1
+
+    for j in range(n):
+        for k in range(j + 1):
+            new_corner1 = rg.Point(x1, y1)
+            new_corner2 = rg.Point(x2, y2)
+            new_rectangle = rg.Rectangle(new_corner1, new_corner2)
+            new_rectangle.attach_to(window)
+            window.render(0.1)
+
+            x1 = x1 - change_x
+            x2 = x2 - change_x
+        y1 += change_y
+        y2 += change_y
+        x1 = Original_x1
+        x2 = Original_x2
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
 
